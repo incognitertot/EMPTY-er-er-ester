@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	c
+    <style>
+        .hidden { display: none; }
+        .revealed-game {
+            background-color: #ffffff;
+            color: #111111;
+            font-family: "Courier New", Courier, monospace;
+            padding: 40px;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+        .revealed-game button {
+            font-family: "Courier New", monospace;
+            background: #87bfe8;
+            border: 1px solid #999999;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin: 5px 0;
+        }
+        .revealed-game button:hover { background: #8A9A5B; }
+        hr { border: 0; border-top: 1px dashed #ccc; margin: 20px 0; }
+        pre { font-size: 12px; line-height: 1.2; }
+    </style>
+</head>
+<body>
+
+<title>ClIcK</title>
+
+<B>HI HOLA BONJOUR I CANT DO ALL THE LANGUAGES,THIS IS A RANDOM PAGE</B> ITS EMPTY WHY ARE U STILL HERE. ALL U CAN DO IS CLICK THE BUTTOON
+
+<br>
+<br>SAMPLE TEXT
+
+<p>BOTTOM TEXT</p>
+
+BUTTON
+<br>
+<button id="counterBtn">Clicks: 0</button>
+
+    <!-- THE ENTIRE FIRST GAME (HIDDEN UNTIL 100 CLICKS)  IM SMORT NOW-->
+    <div id="secretGameZone" class="hidden revealed-game">
+        <hr>
+        <pre>
+  ___    __     _____   ___    _  __
+ /  _\  |  |   |_   _| /  _\  | || /
+ | |    |  |     | |   | |    |    |
+ | |    |  |     | |   | |    |    \   THE BUTTON
+.| |_  .|  |_   .| |_ .| |_  .| |\  \  
+ \___/  \____| |_____| \___/  |_| \__\ 
+        </pre>
+
+        <div>You have <strong id="click-count">0</strong> clickS(if u dont have more than 1 -_-).</div>
+        <button onclick="eatClick()">Click For Click</button>
+
+        <!-- The First Hidden Section (Unlocks at 10 Clicks) LOOK AT ME IMMA SMART BOI DOING THIS-->
+        <div id="merchant-zone" class="hidden">
+            <hr>
+            <h3>The Wandering Merchant</h3>
+            <p>A shady figure approaches. He sells automated click factories .</p>
+            <div>Factories owned: <span id="factory-count">0</span> (Generates 1 click/sec)</div>
+            <button id="buy-factory-btn" onclick="buyFactory()">Buy Factory (Cost: 10 Click)</button>
+        </div>
+
+        <!-- The End Game Section (Unlocks at 50 Clicks) -->
+        <div id="adventure-zone" class="hidden">
+            <hr>
+            <h3>The Foresty Forest</h3>
+            <p>You wander deep into the woods...</p>
+        </div>
+    </div>
+
+    <script>
+        // Main button logic
+        let count = 0;
+        const button = document.getElementById('counterBtn');
+        const secretGameZone = document.getElementById('secretGameZone');
+
+        button.addEventListener('click', () => {
+            count++; 
+            button.textContent = `Clicks: ${count}`;
+            
+            // Unlocks the entire game at 100 clicks (Uh Hu)
+            if (count >= 100) {
+                secretGameZone.classList.remove('hidden');
+            }
+        });
+
+        // The Stuff (IMportant suff [stuffy stuff{stuffier stuff}])
+        let clicks = 0;
+        let factories = 0;
+        let factoryCost = 10;
+
+        function updateDisplay() {
+            document.getElementById('click-count').innerText = clicks;
+            document.getElementById('factory-count').innerText = factories;
+            document.getElementById('buy-factory-btn').innerText = `Buy Factory (Cost: ${factoryCost} Click)`;
+
+            if (clicks >= 10) {
+                document.getElementById('merchant-zone').classList.remove('hidden');
+            }
+            if (clicks >= 50) {
+                document.getElementById('adventure-zone').classList.remove('hidden');
+            }
+        }
+
+        function eatClick() {
+            clicks++;
+            updateDisplay();
+        }
+
+        function buyFactory() {
+            if (clicks >= factoryCost) {
+                clicks -= factoryCost;
+                factories++;
+                updateDisplay();
+            }
+        }
+
+        setInterval(function() {
+            if (factories > 0) {
+                clicks += factories;
+                updateDisplay();
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
